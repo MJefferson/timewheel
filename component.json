@@ -1,0 +1,7 @@
+{
+  "name": "paper2",
+  "version": "0.0.0",
+  "dependencies": {
+    "paperjs": "~0.8.0"
+  }
+}

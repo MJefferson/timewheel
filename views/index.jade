@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  canvas#cartograph(height=700, width=700)
+  script(type="text/paperscript", canvas="cartograph").
+    var path = new Path();
+    path.strokeColor = "black";
+    var start = new Point(100, 100);
+    path.moveTo(start);
+    path.lineTo(start + [ 100, -50 ]);
+
+    new Path.Circle({
+      center: view.center,
+      radius: 30,
+      strokeColor: "black",
+      fillColor: 'green'
+    });
+
+
