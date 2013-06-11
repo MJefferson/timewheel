@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  canvas#cartograph(height=700, width=700)
+  canvas#cartograph(resize="true")
   script(type="text/paperscript", canvas="cartograph").
     var path = new Path();
     path.strokeColor = "black";
@@ -11,11 +11,17 @@ block content
     path.moveTo(start);
     path.lineTo(start + [ 100, -50 ]);
 
-    new Path.Circle({
+    var capitol = new Path.Circle({
       center: view.center,
       radius: 30,
       strokeColor: "black",
       fillColor: 'green'
     });
 
+    capitol.onClick = function(event){
+      alert("Attatalos selected.");
+    }
 
+    function onResize(e){
+      capitol.position = view.center;
+    }
