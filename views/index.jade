@@ -1,27 +1,103 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  canvas#cartograph(resize="true")
-  script(type="text/paperscript", canvas="cartograph").
-    var path = new Path();
-    path.strokeColor = "black";
-    var start = new Point(100, 100);
-    path.moveTo(start);
-    path.lineTo(start + [ 100, -50 ]);
+  .container
+    h1= title
+    p Welcome to #{title}
+    .canvas
+      canvas#cartograph(resize="true")
+    script(type="text/paperscript", canvas="cartograph").
 
-    var capitol = new Path.Circle({
-      center: view.center,
-      radius: 30,
-      strokeColor: "black",
-      fillColor: 'green'
-    });
+      //Static view = sky as seen at midnight from the Northern hemisphere of capital planet
+      //length = altitude; angle = azimuth;
+      //Zenith is at length of 90; Capital planet itself is represented at Zenith
 
-    capitol.onClick = function(event){
-      alert("Attatalos selected.");
-    }
+      var zenith = 90;
 
-    function onResize(e){
-      capitol.position = view.center;
-    }
+      planets = new Array(
+        {name: "Antissa", alt: 20, azi: 35},
+        {name: "Tikal", alt: 50, azi: 100},
+        {name: "Harappa", alt: 65, azi: 25},
+        {name: "Ulaid", alt: 10, azi: 82},
+        {name: "Ebla", alt: 90, azi: 0},
+        {name: "Nara", alt: 70, azi: 65},
+        {name: "Cuzco", alt: 35, azi: 270},
+        {name: "Nineveh", alt: 20, azi: 200},
+        {name: "Lepcis Magna", alt: 80, azi: 300},
+        {name: "Menouthis", alt: 70, azi: 350},
+        {name: "Estemos", alt: 0, azi: 120},
+        {name: "Pompeii", alt: 65, azi: 170},
+        {name: "Isfahan", alt: 10, azi: 230}
+      );
+      
+      function Planet(cfg){
+        this.name = cfg.name;
+        this.altitude = cfg.alt;
+        this.azimuth = cfg.azi;
+      }
+
+      Planet.prototype.getLength = function(planet){
+        return zenith - this.altitude;
+      }
+
+      Planet.prototype.getAngle = function(planet){
+        return this.azimuth;
+      }
+
+      Planet.prototype.updatePosition = function (planet){
+        this.c.position = view.center + this.location;
+      }
+
+      Planets = planets.map(function(p){
+        return new Planet(p);
+      });
+
+      Planets.forEach(function(p){
+        p.location = new Point({ length: p.getLength(), angle: p.getAngle() });
+        p.c = new Path.Circle({
+          center: view.center + p.location,
+          radius: 7,
+          strokeColor: "yellow",
+          fillColor: "#CCC"
+        });
+
+        p.c.onClick = function(){
+          $.noty.clearQueue();
+          noty({type: "success", text: p.name});
+        }
+      });
+
+      capitol = new Path.Circle({
+        center: view.center,
+        radius: 10,
+        strokeColor: "yellow",
+        fillColor: '#333'
+      });
+
+      capitol.onClick = function(event){
+        noty({type: "success", text: "Attatalos"});
+      }
+
+      var a = new Point({length: 5, angle: 90});
+
+      var c = new Point({length: 90, angle: 90});
+      secundus = new Path.Circle({
+        center: view.center + c,
+        radius: 10,
+        strokeColor: "yellow",
+        fillColor: 'green'
+      });
+
+
+
+      function onResize(e){
+        capitol.position  = view.center;
+        Planets.forEach(function(p){
+          p.updatePosition();
+        });
+        console.log(view.zoom);
+      }
+
+      function onFrame(e){
+        secundus.rotate(.5, view.center);
+      }
