@@ -4,6 +4,8 @@
   "dependencies": {
     "paperjs": "~0.8.0",
     "jquery": "~2.0.2",
-    "noty": "~2.0.3"
+    "noty": "~2.0.3",
+    "handlebars.js": "~1.0.0",
+    "numeral": "~1.4.5"
   }
 }

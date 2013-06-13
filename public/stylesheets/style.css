@@ -1,14 +1,54 @@
 
+html {
+  background-image: url(http://www.shafe.co.uk/crystal/images/lshafe/Claude_View_of_Carthage_with_Dido_and_Aeneas.jpg);
+  background-size: cover;
+}
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 .canvas {
-  padding: 40px;
-  border: 1px solid #CCC;
+  background-color: rgba(256,256,256,.9);
+  position: relative;
+}
+
+h1.main-header {
+  color: white;
+  text-shadow: 2px 2px 2px #333;
 }
 
 a {
   color: #00B7FF;
 }
 
+#planet-info {
+  position: absolute;
+  top: 0;
+  background-color: black;
+  color: #CCC;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width: 100%;
+  opacity: 0.9;
+  border-bottom: 5px solid #333;
+}
+
+#planet-info table td:first-child {
+  text-transform: uppercase;
+  font-size: 12px;
+  border-right: 1px solid #555;
+  padding-right: 10px;
+}
+
+#planet-info .bottom-toolbar {
+  text-align: center;
+  color: #CCC;
+  font-weight: bold;
+}
+
+#planet-info .bottom-toolbar a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+}
