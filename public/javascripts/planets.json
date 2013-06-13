@@ -1,0 +1,16 @@
+
+planets = new Array(
+  {name: "Antissa", alt: 20, azi: 35},
+  {name: "Tikal", alt: 50, azi: 100},
+  {name: "Harappa", alt: 65, azi: 25},
+  {name: "Ulaid", alt: 10, azi: 82},
+  {name: "Ebla", alt: 90, azi: 0},
+  {name: "Nara", alt: 70, azi: 65},
+  {name: "Cuzco", alt: 35, azi: 270},
+  {name: "Nineveh", alt: 20, azi: 200},
+  {name: "Lepcis Magna", alt: 80, azi: 300},
+  {name: "Menouthis", alt: 70, azi: 350},
+  {name: "Estemos", alt: 0, azi: 120, population: 4503923},
+  {name: "Pompeii", alt: 65, azi: 170},
+  {name: "Isfahan", alt: 10, azi: 230}
+);
