@@ -37,8 +37,13 @@ a {
 #planet-info table td:first-child {
   text-transform: uppercase;
   font-size: 12px;
-  border-right: 1px solid #555;
   padding-right: 10px;
+}
+
+#planet-info table td:nth-child(2) {
+  padding-left: 10px;
+  color: #1560bd;
+  font-weight: bold;
 }
 
 #planet-info .bottom-toolbar {

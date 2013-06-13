@@ -26,6 +26,10 @@ block content
         this.name = cfg.name;
         this.altitude = cfg.alt;
         this.azimuth = cfg.azi;
+        this.population = cfg.pop || 120000;
+        this.government = cfg.govt || "Republic"
+        this.leader = cfg.leader || "Governor Cratylus"
+        this.symbol = cfg.sym || "MCR"
       }
 
       Planet.prototype.getLength = function(planet){

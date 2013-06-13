@@ -10,11 +10,15 @@ html
     script(type="text/javascript", src="paperjs/lib/paper.js")
     script(type="text/javascript", src="numeral/min/numeral.min.js")
     script(type="text/javascript", src="handlebars.js/dist/handlebars.js")
+    script(type="text/javascript")
+      Handlebars.registerHelper('planetPopulation', function(pop){
+        return numeral(pop).format('00 a');
+      });
     script(type="text/x-handlebars-template", id="planet-info-template").
       <div class="planet-stats">
         <h1>{{name}}</h1>
         <table>
-          <tr><td>Population</td><td>{{population}}</td></tr>
+          <tr><td>Population</td><td>{{planetPopulation population}}</td></tr>
           <tr><td>Government</td><td>{{government}}</td></tr>
           <tr><td>Leader</td><td>{{leader}}</td></tr>
           <tr><td>Symbol</td><td>{{symbol}}</td></tr>
