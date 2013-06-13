@@ -13,6 +13,12 @@ block content
         planetInfoTemplate = Handlebars.compile(source);
         $("#planet-info").hide();
 
+        function stopMusic(){
+          $("audio").each(function(){
+            this.pause();
+          });
+        }
+
     script(type="text/javascript", src="javascripts/planets.json")
     script(type="text/paperscript", canvas="cartograph").
 
@@ -21,6 +27,7 @@ block content
       //Zenith is at length of 90; Capital planet itself is represented at Zenith
 
       var zenith = 90;
+      var conversionFactor = 2;
       
       function Planet(cfg){
         this.name = cfg.name;
@@ -33,7 +40,7 @@ block content
       }
 
       Planet.prototype.getLength = function(planet){
-        return zenith - this.altitude;
+        return (zenith - this.altitude) * conversionFactor;
       }
 
       Planet.prototype.getAngle = function(planet){
@@ -76,7 +83,9 @@ block content
 
           $("#planet-info").show();
           $("#planet-info").html(planetInfoTemplate(p));
-  
+          stopMusic();
+          $("#"+p.name+"-music").get(0).currentTime = 0;
+          $("#"+p.name+"-music").get(0).play(); 
           $("#planet-info a#close-info").click(function(){ $("#planet-info").hide(); });
         }
 
@@ -93,29 +102,69 @@ block content
       });
 
       capitol.onClick = function(event){
-        noty({type: "success", text: "Attatalos"});
       }
 
       var a = new Point({length: 5, angle: 90});
 
       var c = new Point({length: 90, angle: 90});
+
       secundus = new Path.Circle({
         center: view.center + c,
         radius: 10,
         strokeColor: "yellow",
         fillColor: 'green'
       });
+      secundus.c = c;
 
 
 
       function onResize(e){
         capitol.position  = view.center;
+        secundus.position = view.center + secundus.c
         Planets.forEach(function(p){
           p.updatePosition();
         });
-        console.log(view.zoom);
       }
 
       function onFrame(e){
         secundus.rotate(.5, view.center);
       }
+
+    audio#Antissa-music(preload="auto")
+      source(src="music/Antissa.mp3", type="audio/mpeg")
+
+    audio#Harappa-music(preload="auto")
+      source(src="music/Harappa.mp3", type="audio/mpeg")
+
+    audio#Ebla-music(preload="auto")
+      source(src="music/Ebla.mp3", type="audio/mpeg")
+
+    audio#Estemos-music(preload="auto")
+      source(src="music/Estemos.mp3", type="audio/mpeg")
+
+    audio#Isfahan-music(preload="auto")
+      source(src="music/Isfahan.mp3", type="audio/mpeg")
+
+    audio#Menouthis-music(preload="auto")
+      source(src="music/Menouthis.mp3", type="audio/mpeg")
+
+    audio#Cuzco-music(preload="auto")
+      source(src="music/Cuzco.mp3", type="audio/mpeg")
+
+    audio#Lepcis-Magna-music(preload="auto")
+      source(src="music/Lepcis-Magna.mp3", type="audio/mpeg")
+
+    audio#Pompeii-music(preload="auto")
+      source(src="music/Pompeii.mp3", type="audio/mpeg")
+
+    audio#Tikal-music(preload="auto")
+      source(src="music/Tikal.mp3", type="audio/mpeg")
+
+    audio#Nara-music(preload="auto")
+      source(src="music/Nara.mp3", type="audio/mpeg")
+
+    audio#Nineveh-music(preload="auto")
+      source(src="music/Nineveh.mp3", type="audio/mpeg")
+
+    audio#Ulaid-music(preload="auto")
+      source(src="music/Ulaid.mp3", type="audio/mpeg")
