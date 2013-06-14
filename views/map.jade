@@ -70,12 +70,23 @@ block content
 
       Planets.forEach(function(p){
         p.location = new Point({ length: p.getLength(), angle: p.getAngle() });
-        p.c = new Path.Circle({
-          center: view.center + p.location,
-          radius: 7,
-          strokeColor: "yellow",
-          fillColor: "#CCC"
-        });
+        if(p.name != "Ebla"){
+          p.c = new Path.Circle({
+            center: view.center + p.location,
+            radius: 7,
+            strokeColor: "yellow",
+            fillColor: "#CCC"
+          });
+        } else {
+          p.c = new Path.Circle({
+            center: view.center,
+            radius: 9,
+            strokeColor: "white",
+            strokeWidth: 2,
+            fillColor: "#999"
+          });
+          p.c.dashArray = [8,2];
+        }
 
         p.c.onClick = function(){
           // $.noty.clearQueue();
@@ -84,8 +95,9 @@ block content
           $("#planet-info").show();
           $("#planet-info").html(planetInfoTemplate(p));
           stopMusic();
-          $("#"+p.name+"-music").get(0).currentTime = 0;
-          $("#"+p.name+"-music").get(0).play(); 
+          console.log(p.name.replace(" ", "-"))
+          $("#"+p.name.replace(" ", "-") +"-music").get(0).currentTime = 0;
+          $("#"+p.name.replace(" ", "-") +"-music").get(0).play(); 
           $("#planet-info a#close-info").click(function(){ $("#planet-info").hide(); });
         }
 
@@ -93,16 +105,6 @@ block content
         p.c.onMouseLeave = function(){ p.removeOrbit(p) };
 
       });
-
-      capitol = new Path.Circle({
-        center: view.center,
-        radius: 10,
-        strokeColor: "yellow",
-        fillColor: '#333'
-      });
-
-      capitol.onClick = function(event){
-      }
 
       var a = new Point({length: 5, angle: 90});
 
@@ -115,11 +117,17 @@ block content
         fillColor: 'green'
       });
       secundus.c = c;
+      secundus.remove();
 
-
+      horizon = new Path.Circle({
+        center: view.center,
+        radius: 100 * conversionFactor,
+        strokeColor: "DDD",
+        strokeWidth: 3,
+        opacity: .5
+      });
 
       function onResize(e){
-        capitol.position  = view.center;
         secundus.position = view.center + secundus.c
         Planets.forEach(function(p){
           p.updatePosition();
@@ -128,6 +136,9 @@ block content
 
       function onFrame(e){
         secundus.rotate(.5, view.center);
+        Planets.forEach(function(p){
+          p.c.rotate(.03, view.center);
+        });
       }
 
     audio#Antissa-music(preload="auto")
