@@ -110,15 +110,6 @@ block content
 
       var c = new Point({length: 90, angle: 90});
 
-      secundus = new Path.Circle({
-        center: view.center + c,
-        radius: 10,
-        strokeColor: "yellow",
-        fillColor: 'green'
-      });
-      secundus.c = c;
-      secundus.remove();
-
       horizon = new Path.Circle({
         center: view.center,
         radius: 100 * conversionFactor,
@@ -128,14 +119,13 @@ block content
       });
 
       function onResize(e){
-        secundus.position = view.center + secundus.c
+        horizon.position = view.center;
         Planets.forEach(function(p){
           p.updatePosition();
         });
       }
 
       function onFrame(e){
-        secundus.rotate(.5, view.center);
         Planets.forEach(function(p){
           p.c.rotate(.03, view.center);
         });
