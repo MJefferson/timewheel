@@ -1,3 +1,19 @@
+//
+//Static view = sky as seen at midnight from the Northern hemisphere of capital planet
+//length = altitude; angle = azimuth;
+//Zenith is at length of 90; Capital planet itself is represented at Zenith
+var zenith = 90;
+var conversionFactor = 2;
+var divineCenter = view.center;
+
+var horizon = new Path.Circle({
+  center: divineCenter,
+  radius: 100 * conversionFactor,
+  strokeColor: "DDD",
+  strokeWidth: 3,
+  opacity: .5
+});
+
 function Planet(cfg){
   this.name = cfg.name;
   this.altitude = cfg.alt;
@@ -17,12 +33,12 @@ Planet.prototype.getAngle = function(){
 }
 
 Planet.prototype.updatePosition = function(){
-  this.form.position = view.center + this.location;
+  this.form.position = divineCenter + this.location;
 }
 
 Planet.prototype.drawOrbit = function(){
   this.orbit = new Path.Circle({
-    center: view.center,
+    center: divineCenter,
     radius: this.getLength(),
     strokeColor: "#AFA"
   });
@@ -39,14 +55,14 @@ Planet.prototype.render = function(){
 
   if(this.name != "Ebla"){
     this.form = new Path.Circle({
-      center: view.center + this.location,
+      center: divineCenter + this.location,
       radius: 7,
       strokeColor: "yellow",
       fillColor: "#CCC"
     });
   } else {
     this.form = new Path.Circle({
-      center: view.center,
+      center: divineCenter,
       radius: 9,
       strokeColor: "white",
       strokeWidth: 2,
@@ -65,11 +81,6 @@ Planet.prototype.render = function(){
   this.form.onMouseLeave = function(){ this.removeOrbit(); }.bind(this);
 }
 
-//Static view = sky as seen at midnight from the Northern hemisphere of capital planet
-//length = altitude; angle = azimuth;
-//Zenith is at length of 90; Capital planet itself is represented at Zenith
-zenith = 90;
-conversionFactor = 2;
 
 Planets = planets.map(function(p){
   return new Planet(p);
@@ -79,28 +90,30 @@ Planets.forEach(function(p){
   p.render();
 });
 
-var a = new Point({length: 5, angle: 90});
 
-var c = new Point({length: 90, angle: 90});
+function resetDivineCenter(){
+  divineCenter = view.center;
+}
 
-horizon = new Path.Circle({
-  center: view.center,
-  radius: 100 * conversionFactor,
-  strokeColor: "DDD",
-  strokeWidth: 3,
-  opacity: .5
-});
-
-function onResize(e){
-  horizon.position = view.center;
+function orientToCenter(){
+  horizon.position = divineCenter;
   Planets.forEach(function(p){
     p.updatePosition();
   });
 }
 
-function onFrame(e){
+function rotateAroundCenter(){
   Planets.forEach(function(p){
-    p.c.rotate(.03, view.center);
+    p.form.rotate(.03, divineCenter);
   });
 }
 
+view.on('resize', resetDivineCenter);
+view.on('resize', orientToCenter);
+view.on('frame', rotateAroundCenter);
+
+function onMouseDrag(e){
+  var d = e.delta / 3;
+  view.scrollBy(d);
+
+}

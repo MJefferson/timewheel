@@ -2,7 +2,7 @@
   "name": "paper2",
   "version": "0.0.0",
   "dependencies": {
-    "paperjs": "~0.8.0",
+    "paper": ">=0.9.8",
     "jquery": "~2.0.2",
     "noty": "~2.0.3",
     "handlebars.js": "~1.0.0",
