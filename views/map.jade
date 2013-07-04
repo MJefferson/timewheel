@@ -7,9 +7,10 @@ block content
     .canvas
       #planet-info
       canvas#cartograph(resize="true")
+      #map-toolbar
 
       script(type="text/javascript")
-        var source   = $("#planet-info-template").html();
+        var source = $("#planet-info-template").html();
         planetInfoTemplate = Handlebars.compile(source);
         $("#planet-info").hide();
 
@@ -20,116 +21,7 @@ block content
         }
 
     script(type="text/javascript", src="javascripts/planets.json")
-    script(type="text/paperscript", canvas="cartograph").
-
-      //Static view = sky as seen at midnight from the Northern hemisphere of capital planet
-      //length = altitude; angle = azimuth;
-      //Zenith is at length of 90; Capital planet itself is represented at Zenith
-
-      var zenith = 90;
-      var conversionFactor = 2;
-      
-      function Planet(cfg){
-        this.name = cfg.name;
-        this.altitude = cfg.alt;
-        this.azimuth = cfg.azi;
-        this.population = cfg.pop || 120000;
-        this.government = cfg.govt || "Republic"
-        this.leader = cfg.leader || "Governor Cratylus"
-        this.symbol = cfg.sym || "MCR"
-      }
-
-      Planet.prototype.getLength = function(planet){
-        return (zenith - this.altitude) * conversionFactor;
-      }
-
-      Planet.prototype.getAngle = function(planet){
-        return this.azimuth;
-      }
-
-      Planet.prototype.updatePosition = function (planet){
-        this.c.position = view.center + this.location;
-      }
-
-      Planet.prototype.drawOrbit = function(planet){
-        planet.orbit = new Path.Circle({
-          center: view.center,
-          radius: planet.getLength(),
-          strokeColor: "#AFA"
-        });
-        planet.orbit.dashArray = [10,4];
-      }
-
-      Planet.prototype.removeOrbit = function(planet){
-        planet.orbit.remove();
-      }
-
-      Planets = planets.map(function(p){
-        return new Planet(p);
-      });
-
-      Planets.forEach(function(p){
-        p.location = new Point({ length: p.getLength(), angle: p.getAngle() });
-        if(p.name != "Ebla"){
-          p.c = new Path.Circle({
-            center: view.center + p.location,
-            radius: 7,
-            strokeColor: "yellow",
-            fillColor: "#CCC"
-          });
-        } else {
-          p.c = new Path.Circle({
-            center: view.center,
-            radius: 9,
-            strokeColor: "white",
-            strokeWidth: 2,
-            fillColor: "#999"
-          });
-          p.c.dashArray = [8,2];
-        }
-
-        p.c.onClick = function(){
-          // $.noty.clearQueue();
-          // noty({type: "success", text: p.name});
-
-          $("#planet-info").show();
-          $("#planet-info").html(planetInfoTemplate(p));
-          stopMusic();
-          console.log(p.name.replace(" ", "-"))
-          $("#"+p.name.replace(" ", "-") +"-music").get(0).currentTime = 0;
-          $("#"+p.name.replace(" ", "-") +"-music").get(0).play(); 
-          $("#planet-info a#close-info").click(function(){ $("#planet-info").hide(); });
-        }
-
-        p.c.onMouseEnter = function(){ p.drawOrbit(p) };
-        p.c.onMouseLeave = function(){ p.removeOrbit(p) };
-
-      });
-
-      var a = new Point({length: 5, angle: 90});
-
-      var c = new Point({length: 90, angle: 90});
-
-      horizon = new Path.Circle({
-        center: view.center,
-        radius: 100 * conversionFactor,
-        strokeColor: "DDD",
-        strokeWidth: 3,
-        opacity: .5
-      });
-
-      function onResize(e){
-        horizon.position = view.center;
-        Planets.forEach(function(p){
-          p.updatePosition();
-        });
-      }
-
-      function onFrame(e){
-        Planets.forEach(function(p){
-          p.c.rotate(.03, view.center);
-        });
-      }
+    script(type="text/paperscript", src="javascripts/entities/planet.js", canvas="cartograph").
 
     audio#Antissa-music(preload="auto")
       source(src="music/Antissa.mp3", type="audio/mpeg")

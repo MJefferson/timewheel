@@ -1,7 +1,9 @@
 
 html {
-  background-image: url(http://www.shafe.co.uk/crystal/images/lshafe/Claude_View_of_Carthage_with_Dido_and_Aeneas.jpg);
+  /* background-image: url(http://www.shafe.co.uk/crystal/images/lshafe/Claude_View_of_Carthage_with_Dido_and_Aeneas.jpg);
   background-size: cover;
+  */
+  background-color: #333;
 }
 
 body {
@@ -30,8 +32,8 @@ a {
   padding: 10px 20px;
   box-sizing: border-box;
   width: 100%;
-  opacity: 0.9;
-  border-bottom: 5px solid #333;
+  opacity: 0.7;
+  border-bottom: 4px solid #333;
 }
 
 #planet-info table td:first-child {
@@ -56,4 +58,15 @@ a {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 10px;
+}
+
+#map-toolbar {
+  height: 70px;
+  width: 100%;
+  background-color: black;
+  opacity: 0.7;
+  
+  position: absolute;
+  bottom: 0px;
+
 }

@@ -4,7 +4,7 @@ planets = new Array(
   {name: "Tikal", alt: 50, azi: 100},
   {name: "Harappa", alt: 65, azi: 25},
   {name: "Ulaid", alt: 10, azi: 82},
-  {name: "Ebla", alt: 90, azi: 0, leader: "Emperor Katarn", pop: 92832738232, govt: "Parliamentary Monarchy", sym: "EBL"},
+  {name: "Marianstat", alt: 90, azi: 0, leader: "Merimer Afer", pop: 92832738232, govt: "Parliamentary Monarchy", sym: "MST"},
   {name: "Nara", alt: 70, azi: 65},
   {name: "Cuzco", alt: 35, azi: 270},
   {name: "Nineveh", alt: 20, azi: 200},
