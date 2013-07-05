@@ -6,6 +6,7 @@
     "jquery": "~2.0.2",
     "noty": "~2.0.3",
     "handlebars.js": "~1.0.0",
-    "numeral": "~1.4.5"
+    "numeral": "~1.4.5",
+    "jquery-ui": "~1.10.3"
   }
 }

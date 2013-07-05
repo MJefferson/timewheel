@@ -1,23 +1,59 @@
 
 html {
-  /* background-image: url(http://www.shafe.co.uk/crystal/images/lshafe/Claude_View_of_Carthage_with_Dido_and_Aeneas.jpg);
-  background-size: cover;
-  */
-  background-color: #333;
+  background-color: #222;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.air-superiority-blue {
+  color: #72A0C1;
+}
+
 .canvas {
-  background-color: rgba(256,256,256,.9);
+  background-color: #72A0C1;
   position: relative;
+  overflow: hidden;
+  z-index: 2;
+  margin: 40px 0 0 0;
 }
 
 h1.main-header {
-  color: white;
-  text-shadow: 2px 2px 2px #333;
+  z-index: 3;
+  color: #333;
+  font-size: 24px;
+  text-transform: uppercase;
+  /* text-shadow: 3px 3px 5px #555; */
+  margin: 0;
+  padding: 50px 10px;
+  border-bottom: 5px solid #333;
+  outline: 1px solid gold;
+  background-color: white;
+  padding: 50px 10px;
+  background-image: url(/images/vikingshield.jpg);
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-position: 7% -40%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+h1.main-header.collapsed-state {
+  opacity: 1;
+  padding: 5px 10px;
+  background: linear-gradient(to right, #fff 45%, #333 0%);
+} 
+
+h1.main-header span {
+  background-color: white;
+}
+
+h1.main-header .subtitle {
+  color: #BBB;
 }
 
 a {
@@ -32,8 +68,9 @@ a {
   padding: 10px 20px;
   box-sizing: border-box;
   width: 100%;
-  opacity: 0.7;
-  border-bottom: 4px solid #333;
+  opacity: 0.8;
+  border-top: 1px solid #333;
+  border-bottom: 2px solid #CCC;
 }
 
 #planet-info table td:first-child {
@@ -61,12 +98,61 @@ a {
 }
 
 #map-toolbar {
-  height: 70px;
+  height: 90px;
   width: 100%;
-  background-color: black;
+  background-color: #FFF;
+  color: #333;
+  font-size: 12px;
+  text-transform: uppercase;
   opacity: 0.7;
   
   position: absolute;
   bottom: 0px;
 
+  list-style: none;
+  overflow: auto;
+  margin: 0;
 }
+
+#map-toolbar .controls {
+  float: left;
+}
+
+#map-toolbar .buttons {
+  float: right;
+}
+
+#map-toolbar > li {
+  display: block;
+  float: left;
+  padding: 10px;
+  margin-right: 20px;
+} 
+#map-toolbar label.centered {
+  margin-bottom: 10px;
+  text-align: center;
+  display: block;
+}
+
+#map-toolbar li.zoom-control {
+  width: 250px;
+}
+
+#map-toolbar li.zoom-control label {
+  margin-bottom: 18px;
+}
+
+#map-toolbar li.planet-options label {
+  float: left;
+  margin-right: 10px;
+}
+
+#map-toolbar li.planet-options label.centered {
+  float: none;
+}
+
+#map-toolbar .ui-state-active, #map-toolbar .ui-slider-handle.ui-state-default {
+  color: white !important;
+  background: #446cb3 !important;
+}
+

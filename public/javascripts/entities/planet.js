@@ -40,9 +40,9 @@ Planet.prototype.drawOrbit = function(){
   this.orbit = new Path.Circle({
     center: divineCenter,
     radius: this.getLength(),
-    strokeColor: "#AFA"
+    strokeColor: "#CCC"
   });
-  this.orbit.dashArray = [10,4];
+  this.orbit.dashArray = [10,12];
 }
 
 Planet.prototype.removeOrbit = function(){

@@ -1,16 +1,35 @@
-extends layout
-
+extends layout 
 block content
   .container
-    h1.main-header= title
-
     .canvas
       #planet-info
       canvas#cartograph(resize="true")
       ul#map-toolbar
-        li View Page
-        li Follow
-
+        li.zoom-control
+          label.centered Zoom Level
+          #zoom-slider
+        li.planet-options
+          label.centered Planets Displayed
+          input(type="checkbox", id="p-explored", checked="checked")
+          label(for="p-explored") Explored
+          input(type="checkbox", id="p-unexplored", checked="checked")
+          label(for="p-unexplored") Unexplored
+          input(type="checkbox", id="p-friendly", checked="checked")
+          label(for="p-friendly") Friendly
+          input(type="checkbox", id="p-hostile", checked="checked")
+          label(for="p-hostile") Hostile
+        li.topography
+          label.centered Topography
+          input(type="checkbox", id="map-trade", checked="checked")
+          label(for="map-trade") Trade Routes
+          input(type="checkbox", id="map-regions", checked="checked")
+          label(for="map-regions") Regions
+        li.misc
+          label.centered Misc
+          input(type="checkbox", id="map-anim", checked="checked")
+          label(for="map-anim") Animation
+          input(type="checkbox", id="map-music")
+          label(for="map-music") Music
       script(type="text/javascript")
         var source = $("#planet-info-template").html();
         planetInfoTemplate = Handlebars.compile(source);
@@ -21,6 +40,29 @@ block content
             this.pause();
           });
         }
+
+        $(function() {
+          $( "#zoom-slider" ).slider({
+            value:1,
+            min: 1,
+            max: 5,
+            step: 1,
+            slide: function( event, ui ) {
+              event.stopPropagation();
+              paper.view.zoom = ui.value;
+            }
+          });
+
+          $("li.planet-options").buttonset();
+          $("li.topography").buttonset();
+          $("li.misc").buttonset();
+          $("h1.main-header").mouseenter(function(){
+            $(this).removeClass("collapsed-state");
+          }).mouseout(function(){
+            $(this).addClass("collapsed-state");
+          });
+        });
+
 
     script(type="text/javascript", src="javascripts/planets.json")
     script(type="text/paperscript", src="javascripts/entities/planet.js", canvas="cartograph").

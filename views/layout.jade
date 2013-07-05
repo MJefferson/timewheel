@@ -2,8 +2,10 @@ doctype 5
 html
   head
     title= title
+    link(rel='stylesheet', href="jquery-ui/themes/smoothness/jquery-ui.min.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(type="text/javascript", src="jquery/jquery.min.js")
+    script(type="text/javascript", src="jquery-ui/ui/minified/jquery-ui.min.js")
     script(type="text/javascript", src="noty/js/noty/jquery.noty.js")
     script(type="text/javascript", src="noty/js/noty/layouts/top.js")
     script(type="text/javascript", src="noty/js/noty/themes/default.js")
@@ -26,5 +28,7 @@ html
       </div> 
       <div class="bottom-toolbar"><a id="close-info" href="#">Close</a></div>
   body
-    h1.main-header Madronnesian Wars 2
+    h1.main-header.collapsed-state
+      span.title Paradise Wars I : 
+      span.subtitle The Other Worlds
     block content
