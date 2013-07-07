@@ -1,0 +1,8 @@
+{
+  "name": "paper",
+  "version": "0.9.8",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/paperjs/paper.js.git"
+  }
+}
