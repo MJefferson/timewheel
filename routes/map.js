@@ -4,5 +4,5 @@
  */
 
 exports.get = function(req, res){
-  res.render('map');
+  res.render('map', {title: "Timewheel"});
 };

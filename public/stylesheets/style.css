@@ -21,18 +21,38 @@ body {
   margin: 40px 0 0 0;
 }
 
-h1.main-header {
+.canvas > .overlay {
+  position: absolute;
+  height: 0%;
+  width: 0%;
+  bottom: 90px;
   z-index: 3;
+  opacity: .8;
+  -webkit-transform-origin: 50% 0%;
+  -webkit-transform: perspective(500px) rotateX(90deg);
+  background: linear-gradient(to right, #7f1311 30%, #fff 35%, #fff 64%, #7f1311 69%);
+}
+.canvas > .overlay.active {
+  display: block;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-origin: 50% 0%;
+  -webkit-transform: perspective(500px) rotateX(0deg);
+  /* -webkit-transition: -webkit-transform 1s cubic-bezier(1, 0.45, 0.25, 0.98)  0s; */
+}
+
+h1.main-header {
+  cursor: pointer;
+  z-index: 4;
   color: #333;
   font-size: 24px;
   text-transform: uppercase;
   /* text-shadow: 3px 3px 5px #555; */
   margin: 0;
-  padding: 50px 10px;
   border-bottom: 5px solid #333;
   outline: 1px solid gold;
   background-color: white;
-  padding: 50px 10px;
+  padding: 40px 10px 60px 10px;
   background-image: url(/images/vikingshield.jpg);
   background-repeat: no-repeat;
   background-size: 25%;
@@ -40,17 +60,15 @@ h1.main-header {
   position: absolute;
   top: 0;
   width: 100%;
+  -webkit-transition: padding 0.5s linear 0s;
 }
 
 h1.main-header.collapsed-state {
   opacity: 1;
-  padding: 5px 10px;
-  background: linear-gradient(to right, #fff 45%, #333 0%);
+  padding: 15px 10px;
+  -webkit-transition: padding 0s step-end 0s;
+  transition: padding 0s step-end 0s;
 } 
-
-h1.main-header span {
-  background-color: white;
-}
 
 h1.main-header .subtitle {
   color: #BBB;
@@ -107,11 +125,30 @@ a {
   opacity: 0.7;
   
   position: absolute;
+  z-index: 4;
   bottom: 0px;
 
   list-style: none;
   overflow: auto;
   margin: 0;
+}
+
+#map-toolbar.inactive {
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transform: perspective(500px) rotateX(45deg) skewX(5deg);
+  background-color: #000;
+  opacity: 0.4;
+} 
+
+#map-toolbar-overlay.active {
+    height: 90px;
+    position: absolute;
+    width: 100%;
+    background-color: #333;
+    bottom: 0px;
+    z-index: 5;
+    opacity: .8;
+    border-top: 2px solid rgba(255,255,255,.2);
 }
 
 #map-toolbar .controls {

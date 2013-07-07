@@ -2,8 +2,10 @@ extends layout
 block content
   .container
     .canvas
+      .overlay 
       #planet-info
       canvas#cartograph(resize="true")
+      #map-toolbar-overlay
       ul#map-toolbar
         li.zoom-control
           label.centered Zoom Level
@@ -31,6 +33,72 @@ block content
           input(type="checkbox", id="map-music")
           label(for="map-music") Music
       script(type="text/javascript")
+
+        function Timewheel(){
+          this.isPaused = false;
+        };
+        Timewheel.prototype.pause = function(){
+          this.isPaused = true;
+        };
+        Timewheel.prototype.resume = function(){
+          this.isPaused = false;
+        };
+
+        function Game(){
+          this.tw = this.timeWheel = this.wheel = new Timewheel;
+          this.settings = { panningEnabled: false };
+        }
+
+        Game.prototype.pause = function(){
+          if(!this.timeWheel.isPaused){
+            this.timeWheel.pause();
+            this.toggleTopMenu();
+            this.toggleOverlay(); 
+            this.toggleMapToolbar();
+            this.toggleMapToolbarOverlay(); 
+          }
+        }
+
+        Game.prototype.resume = function(){
+          if(this.timeWheel.isPaused){
+            this.timeWheel.resume();
+            this.toggleTopMenu();
+            this.toggleOverlay(); 
+            this.toggleMapToolbar();
+            this.toggleMapToolbarOverlay(); 
+          }
+        }
+
+        //incomplete layer functionality
+
+        //Game.prototype.getLayer = function(name){
+        //  var layers = this.paperProject.layers
+        //  var result = $.grep(layers, function(layer, index){
+        //    return layer.name == name;
+        //  });
+        //  if(result.length == 0){
+        //    throw Error("Layer " + name + " does not exist in the current project.");
+        //    return undefined;
+        //  }
+        //  return result[0];
+        //}
+
+        Game.prototype.toggleTopMenu = function(){
+          $("h1.main-header").toggleClass("collapsed-state");
+        }
+
+        Game.prototype.toggleOverlay = function(){
+          $(".canvas > .overlay").toggleClass("active");
+        }
+
+        Game.prototype.toggleMapToolbar = function(){
+          $("#map-toolbar").toggleClass("inactive");
+        }
+
+        Game.prototype.toggleMapToolbarOverlay = function(){
+          $("#map-toolbar-overlay").toggleClass("active");
+        }
+
         var source = $("#planet-info-template").html();
         planetInfoTemplate = Handlebars.compile(source);
         $("#planet-info").hide();
@@ -42,6 +110,7 @@ block content
         }
 
         $(function() {
+          MW = new Game();
           $( "#zoom-slider" ).slider({
             value:1,
             min: 1,
@@ -56,11 +125,9 @@ block content
           $("li.planet-options").buttonset();
           $("li.topography").buttonset();
           $("li.misc").buttonset();
-          $("h1.main-header").mouseenter(function(){
-            $(this).removeClass("collapsed-state");
-          }).mouseout(function(){
-            $(this).addClass("collapsed-state");
-          });
+
+          $("h1.main-header").click(MW.pause.bind(MW));
+          $(".canvas > .overlay").click(MW.resume.bind(MW));
         });
 
 

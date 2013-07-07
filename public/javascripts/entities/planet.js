@@ -113,7 +113,8 @@ view.on('resize', orientToCenter);
 view.on('frame', rotateAroundCenter);
 
 function onMouseDrag(e){
-  var d = e.delta / 3;
-  view.scrollBy(d);
-
+  if(MW.settings.panningEnabled){
+    var d = e.delta / 3;
+    view.scrollBy(d);
+  }
 }
