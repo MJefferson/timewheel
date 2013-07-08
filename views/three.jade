@@ -12,12 +12,12 @@ block content
       var loader = new THREE.ColladaLoader();
       loader.options.convertUpAxis = true;
 
-      loader.load('javascripts/cycle1.dae', function ( collada ) {
+      loader.load('javascripts/city/models/city.dae', function ( collada ) {
 
         dae = collada.scene;
         skin = collada.skins[ 0 ];
 
-        dae.scale.x = dae.scale.y = dae.scale.z = 0.5;
+        dae.scale.x = dae.scale.y = dae.scale.z = 0.005;
         dae.updateMatrix();
 
         init();
@@ -26,7 +26,7 @@ block content
       });
 
       function init() {
-        container = $("div.container")[0];
+        container = $("#city-canvas")[0];
         document.body.appendChild( container );
 
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
@@ -72,7 +72,7 @@ block content
 
       function render() {
 
-        var timer = Date.now() * 0.0005;
+        var timer = Date.now() * 0.0002;
 
         camera.position.x = Math.cos( timer ) * 10;
         camera.position.y = 2;
@@ -87,3 +87,5 @@ block content
         renderer.render( scene, camera );
 
       }
+    #city-canvas 
+    #city-overlay The City of Marianstat

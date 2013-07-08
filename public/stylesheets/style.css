@@ -193,3 +193,16 @@ a {
   background: #446cb3 !important;
 }
 
+#city-overlay {
+  width: 50%;
+  position: absolute;
+  background-color: #FFF;
+  opacity: .7;
+  font-size: 40px;
+  color: #333;
+  z-index: 2;
+  text-transform: uppercase;
+  top: 100px;
+  border-right: 20px solid blueviolet;
+  padding: 20px;
+}
