@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , map = require('./routes/map')
+  , three = require('./routes/three')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
@@ -26,6 +27,7 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'components')));
 
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -33,6 +35,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/map', map.get);
+app.get('/three', three.test);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

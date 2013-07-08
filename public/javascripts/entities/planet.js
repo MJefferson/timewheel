@@ -43,6 +43,7 @@ Planet.prototype.drawOrbit = function(){
     strokeColor: "#CCC"
   });
   this.orbit.dashArray = [10,12];
+  this.orbit.moveBelow(this.form);
 }
 
 Planet.prototype.removeOrbit = function(){
