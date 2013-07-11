@@ -2,8 +2,8 @@
 //Static view = sky as seen at midnight from the Northern hemisphere of capital planet
 //length = altitude; angle = azimuth;
 //Zenith is at length of 90; Capital planet itself is represented at Zenith
-var zenith = 90;
-var conversionFactor = 2;
+var zenith = MW.settings.map.zenith;
+var conversionFactor = MW.settings.map.conversionFactor;
 var divineCenter = view.center;
 
 var horizon = new Path.Circle({
@@ -11,7 +11,8 @@ var horizon = new Path.Circle({
   radius: 100 * conversionFactor,
   strokeColor: "DDD",
   strokeWidth: 3,
-  opacity: .5
+  fillColor: "#333",
+  opacity: .9
 });
 
 function Planet(cfg){
@@ -104,9 +105,11 @@ function orientToCenter(){
 }
 
 function rotateAroundCenter(){
-  Planets.forEach(function(p){
-    p.form.rotate(.03, divineCenter);
-  });
+  if(!MW.settings.isPaused){
+    Planets.forEach(function(p){
+      p.form.rotate(.03, divineCenter);
+    });
+  }
 }
 
 view.on('resize', resetDivineCenter);

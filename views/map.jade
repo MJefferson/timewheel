@@ -32,87 +32,18 @@ block content
           label(for="map-anim") Animation
           input(type="checkbox", id="map-music")
           label(for="map-music") Music
+      script(type="text/javascript", src="javascripts/timewheel.js")
       script(type="text/javascript")
-
-        function Timewheel(){
-          this.isPaused = false;
-        };
-        Timewheel.prototype.pause = function(){
-          this.isPaused = true;
-        };
-        Timewheel.prototype.resume = function(){
-          this.isPaused = false;
-        };
-
-        function Game(){
-          this.tw = this.timeWheel = this.wheel = new Timewheel;
-          this.settings = { panningEnabled: false };
-        }
-
-        Game.prototype.pause = function(){
-          if(!this.timeWheel.isPaused){
-            this.timeWheel.pause();
-            this.toggleTopMenu();
-            this.toggleOverlay(); 
-            this.toggleMapToolbar();
-            this.toggleMapToolbarOverlay(); 
-          }
-        }
-
-        Game.prototype.resume = function(){
-          if(this.timeWheel.isPaused){
-            this.timeWheel.resume();
-            this.toggleTopMenu();
-            this.toggleOverlay(); 
-            this.toggleMapToolbar();
-            this.toggleMapToolbarOverlay(); 
-          }
-        }
-
-        //incomplete layer functionality
-
-        //Game.prototype.getLayer = function(name){
-        //  var layers = this.paperProject.layers
-        //  var result = $.grep(layers, function(layer, index){
-        //    return layer.name == name;
-        //  });
-        //  if(result.length == 0){
-        //    throw Error("Layer " + name + " does not exist in the current project.");
-        //    return undefined;
-        //  }
-        //  return result[0];
-        //}
-
-        Game.prototype.toggleTopMenu = function(){
-          $("h1.main-header").toggleClass("collapsed-state");
-        }
-
-        Game.prototype.toggleOverlay = function(){
-          $(".canvas > .overlay").toggleClass("active");
-        }
-
-        Game.prototype.toggleMapToolbar = function(){
-          $("#map-toolbar").toggleClass("inactive");
-        }
-
-        Game.prototype.toggleMapToolbarOverlay = function(){
-          $("#map-toolbar-overlay").toggleClass("active");
-        }
 
         var source = $("#planet-info-template").html();
         planetInfoTemplate = Handlebars.compile(source);
         $("#planet-info").hide();
 
-        function stopMusic(){
-          $("audio").each(function(){
-            this.pause();
-          });
-        }
-
         $(function() {
-          MW = new Game();
+          MW = new Timewheel();
+
           $( "#zoom-slider" ).slider({
-            value:1,
+            value: 1,
             min: 1,
             max: 5,
             step: 1,
