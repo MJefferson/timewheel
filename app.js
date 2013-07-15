@@ -9,7 +9,8 @@ var express = require('express')
   , three = require('./routes/three')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , Mincer = require('mincer');
 
 var app = express();
 
@@ -27,6 +28,11 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'components')));
 
+var minceEnv = new Mincer.Environment();
+minceEnv.appendPath('public/javascripts/entities');
+
+app.use('/papers', Mincer.createServer(minceEnv));
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -34,6 +40,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+//app.get('/login', routes.login);
+// create login view
 app.get('/map', map.get);
 app.get('/three', three.test);
 app.get('/users', user.list);

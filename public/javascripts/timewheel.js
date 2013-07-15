@@ -6,6 +6,7 @@
     this.settings.map = {
       panningEnabled: false,
       defaultZoom: 3,
+      rotationDelta: .03,
       zenith: 90,
       conversionFactor: 2
     };
@@ -64,6 +65,6 @@
   };
 
 
-  //export a single global object
+  // export a single global object
   window.Timewheel = Timewheel;
 })();

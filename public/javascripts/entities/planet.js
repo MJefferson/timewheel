@@ -1,3 +1,5 @@
+//= require_self
+//= require state_vectors
 //
 //Static view = sky as seen at midnight from the Northern hemisphere of capital planet
 //length = altitude; angle = azimuth;
@@ -107,7 +109,7 @@ function orientToCenter(){
 function rotateAroundCenter(){
   if(!MW.settings.isPaused){
     Planets.forEach(function(p){
-      p.form.rotate(.03, divineCenter);
+      p.form.rotate(MW.settings.map.rotationDelta, divineCenter);
     });
   }
 }
