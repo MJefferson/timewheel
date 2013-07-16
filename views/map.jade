@@ -30,8 +30,8 @@ block content
           label.centered Misc
           input(type="checkbox", id="map-anim", checked="checked")
           label(for="map-anim") Animation
-          input(type="checkbox", id="map-music")
-          label(for="map-music") Music
+          input(type="checkbox", id="map-panning")
+          label(for="map-panning") Panning
       script(type="text/javascript", src="javascripts/timewheel.js")
       script(type="text/javascript")
 
@@ -56,6 +56,10 @@ block content
           $("li.planet-options").buttonset();
           $("li.topography").buttonset();
           $("li.misc").buttonset();
+
+          $("#map-panning").on('click', function(){
+            MW.settings.map.panningEnabled = $(this).prop("checked");
+          });
 
           $("h1.main-header").click(MW.pause.bind(MW));
           $(".canvas > .overlay").click(MW.resume.bind(MW));

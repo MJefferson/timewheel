@@ -89,6 +89,12 @@ a {
   opacity: 0.8;
   border-top: 1px solid #333;
   border-bottom: 2px solid #CCC;
+  overflow: auto;
+}
+
+#planet-info img.planet-render {
+  float: left;
+  margin-right: 15px;
 }
 
 #planet-info table td:first-child {

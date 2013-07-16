@@ -19,20 +19,14 @@
     if(!this.settings.isPaused){
       //do ui things
       this.settings.isPaused = true;
-      this.ui.toggleTopMenu();
-      this.ui.toggleOverlay(); 
-      this.ui.toggleMapToolbar();
-      this.ui.toggleMapToolbarOverlay(); 
+      this.ui.toggleGameState();
     }
   };
 
   Timewheel.prototype.resume = function(){
     if(this.settings.isPaused){
       this.settings.isPaused = false;
-      this.ui.toggleTopMenu();
-      this.ui.toggleOverlay(); 
-      this.ui.toggleMapToolbar();
-      this.ui.toggleMapToolbarOverlay(); 
+      this.ui.toggleGameState();
     }
   };
 
@@ -42,10 +36,10 @@
   var ui = Timewheel.prototype.ui =  {};
 
   ui.toggleGameState = function(){
-    this.ui.toggleTopMenu();
-    this.ui.toggleOverlay(); 
-    this.ui.toggleMapToolbar();
-    this.ui.toggleMapToolbarOverlay(); 
+    this.toggleTopMenu();
+    this.toggleOverlay(); 
+    this.toggleMapToolbar();
+    this.toggleMapToolbarOverlay(); 
   };
 
   ui.toggleTopMenu = function(){
@@ -63,7 +57,6 @@
   ui.toggleMapToolbarOverlay = function(){
     $("#map-toolbar-overlay").toggleClass("active");
   };
-
 
   // export a single global object
   window.Timewheel = Timewheel;
