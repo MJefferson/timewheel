@@ -14,7 +14,7 @@ function drawAlliance(){
   }); 
   
   p.alliances = new Group(vectors);
-  p.alliances.moveBelow(p.form);
+  p.alliances.moveBelow(planetForms);
   p.alliances.onFrame = function(){
     this.rotate(MW.settings.map.rotationDelta, divineCenter);
   }

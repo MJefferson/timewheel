@@ -14,30 +14,32 @@ var horizon = new Path.Circle({
   strokeColor: "DDD",
   strokeWidth: 3,
   fillColor: "#333",
-  opacity: .9
+  opacity: 0.9
 });
+
+var planetForms = new Group();
 
 function Planet(cfg){
   this.name = cfg.name;
   this.altitude = cfg.alt;
   this.azimuth = cfg.azi;
   this.population = cfg.pop || 120000;
-  this.government = cfg.govt || "Republic"
-  this.leader = cfg.leader || "Governor Cratylus"
-  this.symbol = cfg.sym || "MCR"
+  this.government = cfg.govt || "Republic";
+  this.leader = cfg.leader || "Governor Cratylus";
+  this.symbol = cfg.sym || "MCR";
 }
 
 Planet.prototype.getLength = function(){
   return (zenith - this.altitude) * conversionFactor;
-}
+};
 
 Planet.prototype.getAngle = function(){
   return this.azimuth;
-}
+};
 
 Planet.prototype.updatePosition = function(){
   this.form.position = divineCenter + this.location;
-}
+};
 
 Planet.prototype.drawOrbit = function(){
   this.orbit = new Path.Circle({
@@ -47,17 +49,17 @@ Planet.prototype.drawOrbit = function(){
   });
   this.orbit.dashArray = [10,12];
   this.orbit.moveBelow(this.form);
-}
+};
 
 Planet.prototype.removeOrbit = function(){
   this.orbit.remove();
-}
+};
 
 Planet.prototype.render = function(){
 
   this.location = new Point({ length: this.getLength(), angle: this.getAngle() });
 
-  if(this.name != "Ebla"){
+  if(this.name != "Ebla"){ //or whatever the capitol is now.
     this.form = new Path.Circle({
       center: divineCenter + this.location,
       radius: 7,
@@ -83,7 +85,8 @@ Planet.prototype.render = function(){
 
   this.form.onMouseEnter = function(){ this.drawOrbit(); }.bind(this);
   this.form.onMouseLeave = function(){ this.removeOrbit(); }.bind(this);
-}
+  planetForms.addChild(this.form);
+};
 
 
 Planets = planets.map(function(p){
