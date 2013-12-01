@@ -123,7 +123,7 @@ view.on('frame', rotateAroundCenter);
 
 function onMouseDrag(e){
   if(MW.settings.map.panningEnabled){
-    var d = e.delta / 3;
+    var d = (e.delta * -1) / 3;
     view.scrollBy(d);
   }
 }

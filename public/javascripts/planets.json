@@ -13,5 +13,13 @@ planets = new Array(
   {name: "Estemos", alt: 0, azi: 120, pop: 4503923},
   {name: "Dresdai", alt: 65, azi: 170},
   {name: "Isfahan", alt: 10, azi: 230},
-  {name: "Matis Crata", alt: -20, azi: 130}
+  {name: "Matis Crata", alt: -20, azi: 130},
+  {name: "Pyramida I", alt: -25, azi: 310},
+  {name: "Pyramida II", alt: -30, azi: 280},
+  {name: "Origena Alpha", alt: -35, azi: 350},
+  {name: "Geodesian Alpha", alt: -40, azi: 180},
+  {name: "Gorgias I", alt: -30, azi: 40},
+  {name: "Gorgias II", alt: -20, azi: 30},
+  {name: "Cartesian I", alt: -50, azi: 155},
+  {name: "Cartesian II", alt: -20, azi: 230}
 );
