@@ -2,7 +2,7 @@ extends layout
 block content
   .container
     .canvas
-      .overlay 
+      .overlay
       #planet-info
       canvas#cartograph(resize="true")
       #map-toolbar-overlay
@@ -33,7 +33,7 @@ block content
           input(type="checkbox", id="map-panning")
           label(for="map-panning") Panning
       script(type="text/javascript", src="javascripts/timewheel.js")
-      script(type="text/javascript")
+      script(type="text/javascript").
 
         var source = $("#planet-info-template").html();
         planetInfoTemplate = Handlebars.compile(source);

@@ -1,4 +1,4 @@
-doctype 5
+doctype html
 html
   head
     title= title
@@ -12,7 +12,7 @@ html
     script(type="text/javascript", src="paper/dist/paper-full.min.js")
     script(type="text/javascript", src="numeral/min/numeral.min.js")
     script(type="text/javascript", src="handlebars.js/dist/handlebars.js")
-    script(type="text/javascript")
+    script(type="text/javascript").
       Handlebars.registerHelper('planetPopulation', function(pop){
         return numeral(pop).format('00 a');
       });
